@@ -1,1 +1,11 @@
-Website for my band New China. React webpages are rendered with CCS3DRender on to the face of a cube with a WebGL background.
+My website for the band New China was never launched, so I am reworking the site for Second Moon Records.
+
+To Do:
+- Add Django backend
+-- News
+-- Releases
+- Use nodemailer
+- Create release page
+- Change embeds/api calls
+- ~Figure out background issue~
+- Upgrade packages?

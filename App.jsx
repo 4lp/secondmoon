@@ -8,13 +8,13 @@ class App extends React.Component {
 	render(){
 		return (
 			<div id="page0">
-				<h1 className="text-center">HELLO NEW CHINA</h1>
+				<h1 className="text-center">SECOND MOON</h1>
 				<a 
 				    href="#" 
 			            onClick={()=>{dhtmlwindow.open('ajaxbox', 'div', 'releases', 'RELEASES', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1'); 
 				    return false}}
 				>
-				Create/ Open Ajax Window
+				RELEASES
 				</a>
 				<div id="releases" style={{display: "none"}}>
 					<p>Here's what we've done!</p>

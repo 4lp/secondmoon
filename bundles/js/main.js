@@ -120,7 +120,7 @@ function init() {
 	glscene.background = new THREE.Color( 0x000000 );
 	geometry = new THREE.Geometry();
 	var textureLoader = new THREE.TextureLoader();
-	sprite1 = textureLoader.load( "./mushroomemoji.png" );
+	sprite1 = textureLoader.load( "./bundles/mushroomemoji.png" );
 
 	for ( i = 0; i < 100; i ++ ) {
 		var vertex = new THREE.Vector3();
