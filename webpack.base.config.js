@@ -37,6 +37,10 @@ module.exports = {
     loaders: [] // add all common loaders here
   },
 
+  node: {
+    fs: "empty"
+  },
+
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js', '.jsx']

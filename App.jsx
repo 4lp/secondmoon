@@ -1,5 +1,6 @@
 import React from "react"
 import { render } from "react-dom"
+//import nodemailer from "nodemailer"
 
 const fortunes = ["fortune 1", "fortune 2"]
 
@@ -69,10 +70,25 @@ class App4 extends React.Component {
 	}
 }
 class App5 extends React.Component {
+
+
+	sendMessage(message){
+		return 0
+		}
+
 	render(){
 		return(
-			<div id="message">
-				<p><a href="mailto:booking@newchina.cool">EMAIL US</a> at booking@newchina.cool</p>
+		//	<div id="message">
+		//		<p><a href="mailto:booking@newchina.cool">EMAIL US</a> at booking@newchina.cool</p>
+		//	</div>
+			<div>
+				<form action="https://formspree.io/secondmoonrecs@gmail.com" method="POST">
+					<input name="emailname" id="emailname" type="text"/>
+					<input name="emailreply" id="emailreply" type="email"/>
+					<textarea name="emailmessage" id="emailmessage"></textarea>
+					<input type="submit" value="Send"/>
+					//<a onClick={()=>this.sendMessage(document.getElementById("emailmessage").value)}>SUBMIT</a>
+				</form>
 			</div>
 			)
 	}
