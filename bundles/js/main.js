@@ -54,12 +54,12 @@ function setEnvelopeState() {
 function moveEnvelope() {
 	if (envelopeDown === false) {
 		let parentTween = new TWEEN.Tween( parent.rotation ).to( {  x:  parent.rotation.x + toRadian(180)}, 1000 ).easing( TWEEN.Easing.Quadratic.Out).start();
-		new TWEEN.Tween( messageObj.position ).to( {  y:  messageObj.position.y - 350}, 1000 ).easing( TWEEN.Easing.Quadratic.Out).start();
+		new TWEEN.Tween( messageObj.position ).to( {  y:  messageObj.position.y - 350, z:messageObj.position.z - 1}, 1000 ).easing( TWEEN.Easing.Quadratic.Out).start();
 		parentTween.delay(1000)
 		parentTween.start()
 	} else {
 		new TWEEN.Tween( parent.rotation ).to( {  x:  parent.rotation.x + toRadian(-180)}, 1000 ).easing( TWEEN.Easing.Quadratic.Out).start();
-		let messageTween = new TWEEN.Tween( messageObj.position ).to( {  y:  messageObj.position.y + 350}, 1000 ).easing( TWEEN.Easing.Quadratic.Out)
+		let messageTween = new TWEEN.Tween( messageObj.position ).to( {  y:  messageObj.position.y + 350, z:messageObj.position.z + 1}, 1000 ).easing( TWEEN.Easing.Quadratic.Out)
 		messageTween.delay(1000)
 		messageTween.start()
 	}
@@ -168,19 +168,14 @@ function createCSS3DObject(content) {
 	info.style.right = '30px';
 	info.style.width = '100%';
 	info.style.textAlign = 'right';
-	info.style.color = Math.random() * 0xffffff
 	info.style.fontWeight = 'bold';
-	info.style.backgroundColor = Math.random() * 0xffffff
 	info.style.zIndex = '1';
-	info.innerHTML = '<p>click and drag or use your keyboard to move the cube</p>'
+	// color doesn't work unless doing it inline for some reason...
+	info.innerHTML = '<p style="color:white">Click and drag or use your keyboard to move the cube. Use your scrollwheel to zoom.</p>'
 	document.body.appendChild( info );
-	// convert the string to dome elements
 	var wrapper = document.createElement('div');
 	wrapper.innerHTML = content;
 	var div = wrapper.firstChild;
-	// set some values on the div to style it.
-	// normally you do this directly in HTML and
-	// CSS files.
 	div.style.width = '200px';
 	div.style.height = '200px';
 	div.style.opacity = 0.5;
@@ -212,6 +207,11 @@ function createCSS3DObject(content) {
 		element.style.background = new THREE.Color( Math.random() * 0xffffff ).getStyle();
 		element.style.opacity = '1';
 
+		// flip the reversed face
+		if (i === 5){
+			element.style.transform = "rotateY(180deg)";
+		}
+
 		var object = new THREE.CSS3DObject( element );
 		object.position.fromArray( pos[ i ] );
 		object.rotation.fromArray( rot[ i ] );
@@ -221,9 +221,10 @@ function createCSS3DObject(content) {
 
 	//message
 	let message = document.createElement('div')
+	var messageDimensions = '350px'
 	message.id = "message"
-	message.style.width = '200px'
-	message.style.height = '200px'
+	message.style.width = messageDimensions;
+	message.style.height = messageDimensions;
 	message.style.background = new THREE.Color( Math.random() * 0xffffff ).getStyle();
 	messageObj = new THREE.CSS3DObject(message)
 	messageObj.position.z = 200

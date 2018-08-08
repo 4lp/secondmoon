@@ -2,10 +2,16 @@ My website for the band New China was never launched, so I am reworking the site
 
 To Do:
 - Add Django backend
--- News
--- Releases
-- Use nodemailer
-- Create release page
-- Change embeds/api calls
+-- ~News~
+-- ~Releases~
+-- Get static files working
+-- Set up Redux
+- ~Use nodemailer~ used formspree instead
+- Change embeds/~api calls~
 - ~Figure out background issue~
 - Upgrade packages?
+- Styles!
+-- Release page
+-- News
+-- Fortune
+-- Messaging

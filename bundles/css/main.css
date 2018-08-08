@@ -78,3 +78,7 @@ body {
     border-left: 200px solid red;
     border-bottom: 200px solid transparent;
 }
+
+form {
+    padding: 20px;
+}
