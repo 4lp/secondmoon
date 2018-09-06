@@ -12,7 +12,7 @@ var cube;
 var renderer;
 var scene;
 var camera;
-var envelopeDown
+var envelopeDown = true;
 var envelopeFace
 var parent
 var messageObj
@@ -52,7 +52,7 @@ function setEnvelopeState() {
 }
 
 function moveEnvelope() {
-	if (envelopeDown === false) {
+	if (envelopeDown === true) {
 		let parentTween = new TWEEN.Tween( parent.rotation ).to( {  x:  parent.rotation.x + toRadian(180)}, 1000 ).easing( TWEEN.Easing.Quadratic.Out).start();
 		new TWEEN.Tween( messageObj.position ).to( {  y:  messageObj.position.y - 350, z:messageObj.position.z - 1}, 1000 ).easing( TWEEN.Easing.Quadratic.Out).start();
 		parentTween.delay(1000)
@@ -62,6 +62,20 @@ function moveEnvelope() {
 		let messageTween = new TWEEN.Tween( messageObj.position ).to( {  y:  messageObj.position.y + 350, z:messageObj.position.z + 1}, 1000 ).easing( TWEEN.Easing.Quadratic.Out)
 		messageTween.delay(1000)
 		messageTween.start()
+	}
+}
+
+function envelopeOnHover() {
+	if (envelopeDown == true) {
+		new TWEEN.Tween( parent.rotation ).to( {  x:  parent.rotation.x + toRadian(-20)}, 100 ).easing( TWEEN.Easing.Quadratic.Out).start();
+		this.innerHTML = "Click me!";
+	}
+}
+
+function envelopeOutHover() {
+	if (envelopeDown == true) {
+		new TWEEN.Tween( parent.rotation ).to( {  x:  parent.rotation.x + toRadian(20)}, 100 ).easing( TWEEN.Easing.Quadratic.Out).start();
+		this.innerHTML = "👀";
 	}
 }
 
@@ -120,7 +134,7 @@ function init() {
 	glscene.background = new THREE.Color( 0x000000 );
 	geometry = new THREE.Geometry();
 	var textureLoader = new THREE.TextureLoader();
-	sprite1 = textureLoader.load( "./bundles/mushroomemoji.png" );
+	sprite1 = textureLoader.load( "https://i.imgur.com/AK8PCIL.png" );
 
 	for ( i = 0; i < 100; i ++ ) {
 		var vertex = new THREE.Vector3();
@@ -204,7 +218,11 @@ function createCSS3DObject(content) {
 		element.innerHTML = i
 		element.style.width = '400px';
 		element.style.height = '400px';
-		element.style.background = new THREE.Color( Math.random() * 0xffffff ).getStyle();
+		if (i !== 0){
+			element.style.background = new THREE.Color( Math.random() * 0xffffff ).getStyle();
+		} else {
+			element.style.background = new THREE.Color( 0xffffff ).getStyle();
+		}
 		element.style.opacity = '1';
 
 		// flip the reversed face
@@ -256,9 +274,12 @@ function createCSS3DObject(content) {
 	let envelope = document.createElement('div')
 	envelope.id = "triangle-down"
 	envelope.onclick = function(e) {setEnvelopeState(), moveEnvelope()}
+	envelope.innerHTML = "👀";
+	envelope.onmouseover = envelopeOnHover;
+	envelope.onmouseout = envelopeOutHover;
 	envelopeFace = new THREE.CSS3DObject(envelope)
 	parent = new THREE.Object3D();
-	envelopeFace.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 100, 0 ) );
+	//envelopeFace.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 100, 0 ) );
 	parent.add(envelopeFace)
 	parent.position.z = 200
 	parent.position.y = 200

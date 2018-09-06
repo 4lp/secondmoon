@@ -25,7 +25,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
     new HtmlWebpackPlugin({
-      template: 'index.ejs'
+      template: 'index.html'
     }),
     new ScriptExtHtmlWebpackPlugin({
        sync: [/js\//],

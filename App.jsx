@@ -1,6 +1,24 @@
 import React from "react"
 import { render } from "react-dom"
-//import nodemailer from "nodemailer"
+import {
+	  createStore,
+	  compose,
+	  applyMiddleware,
+	  combineReducers,
+} from "redux"
+import { Provider } from "react-redux"
+import thunk from "redux-thunk"
+import * as reducers from "./reactjs/reducers"
+import BlogpostContainer from "./reactjs/containers/BlogpostContainer"
+import ReleaseContainer from "./reactjs/containers/ReleaseContainer"
+
+let finalCreateStore = compose(
+  applyMiddleware(thunk),
+	  window.devToolsExtension ? window.devToolsExtension() : f => f
+)(createStore)
+let reducer = combineReducers(reducers)
+let store = finalCreateStore(reducer)
+
 
 const fortunes = [
     'Can we go to the park.',
@@ -14,24 +32,35 @@ const fortunes = [
 
 class App extends React.Component {
 
+	newsClickHandler(){
+		dhtmlwindow.open('ajaxbox', 'div', 'news', 'NEWS', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1'); 
+		render(<BlogpostPage/>, document.querySelector("#ajaxbox>.drag-contentarea"))
+		return false
+	}
+
     render(){
         return (
             <div id="page0">
-                <h1 className="text-center">SECOND MOON</h1>
-                <a 
-                    href="#" 
-                        onClick={()=>{dhtmlwindow.open('ajaxbox', 'div', 'releases', 'RELEASES', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1'); 
-                    return false}}
-                >
-                RELEASES
-                </a>
-                <a 
-                    href="#" 
-                        onClick={()=>{dhtmlwindow.open('ajaxbox', 'div', 'news', 'NEWS', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1'); 
-                    return false}}
-                >
-                RELEASES
-                </a>
+				<img className="main-img" src="https://i.imgur.com/kowrKXx.png"></img>
+				<ul>
+					<li>
+						<a 
+							href="#" 
+								onClick={()=>{this.newsClickHandler()}}
+						>
+						news
+						</a>
+					</li>
+					<li>
+						<a 
+							href="#" 
+								onClick={()=>{dhtmlwindow.open('ajaxbox', 'div', 'releases', 'RELEASES', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1'); 
+							return false}}
+						>
+						releases
+						</a>
+					</li>
+				</ul>
                 <div id="releases" style={{display: "none"}}>
                     <p>Here's what we've done!</p>
                 </div>
@@ -94,11 +123,11 @@ class App5 extends React.Component {
         return(
             <div>
                 <form action="https://formspree.io/secondmoonrecs@gmail.com" method="POST">
-                    <label for="emailname">Your Name</label>
+                    <label htmlFor="emailname">Your Name</label>
                     <input className="form-control" name="emailname" id="emailname" type="text"/>
-                    <label for="emailreply">Your Email</label>
+                    <label htmlFor="emailreply">Your Email</label>
                     <input className="form-control"name="emailreply" id="emailreply" type="email"/>
-                    <label for="emailmessage">Message</label>
+                    <label htmlFor="emailmessage">Message</label>
                     <textarea className="form-control"name="emailmessage" id="emailmessage"></textarea>
                     <br/>
                     <button className="btn btn-primary" type="submit" value="Send">Submit</button>
@@ -123,7 +152,11 @@ class App6 extends React.Component {
           min = Math.ceil(min);
           max = Math.floor(max);
           return Math.floor(Math.random() * (max - min)) + min;
-        }
+      }
+
+	  clearAnswer(){
+		  return null
+	  }
 
       getFortune() {
           let len = fortunes.length
@@ -134,11 +167,25 @@ class App6 extends React.Component {
     render(){
         return(
             <div id="page5">
-                <button className="btn" onClick={() => this.getFortune()}>~ask the noochCube~</button>
+				<form>
+                    <label htmlFor="question">Ask the Cube</label>
+                    <input className="form-control" name="question" id="question"/>
+                	<button className="btn" onClick={() => this.getFortune()}>~ask the noochCube~</button>
+				</form>
                 <p>{this.state.fortune}</p>
             </div>
             )
     }
+}
+
+class BlogpostPage extends React.Component {
+	render(){
+		return(
+			<Provider store={store}>
+				<BlogpostContainer count="02"/>
+			</Provider>
+		)
+	}
 }
 
 render(<App/>, document.getElementById("page0"))
