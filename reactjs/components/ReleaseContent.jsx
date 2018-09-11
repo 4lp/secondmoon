@@ -7,7 +7,7 @@ export default class ReleaseContent extends React.Component {
         this.state = {
           selectedRelease: "none",
           optionalContent: "",
-	  optionalHTML: "",
+	  	  optionalHTML: "",
         }
     }
 
@@ -25,7 +25,7 @@ export default class ReleaseContent extends React.Component {
 
   renderSelectedRelease () {
     return (
-      <ReleasePage selectedRelease = {this.state.selectedRelease} optionalContent = {this.state.optionalContent} optionalHTML = {this.state.optionalHTML} setReleaseMain={this.props.setReleaseMain}/>
+      <ReleasePage selectedRelease = {this.state.selectedRelease} optionalContent = {this.state.optionalContent} optionalHTML = {this.state.optionalHTML} setSelectedRelease={this.setSelectedRelease.bind(this)}/>
     )
   }
 
@@ -36,8 +36,8 @@ export default class ReleaseContent extends React.Component {
     content.forEach((item, index) => {
       let node = (
         <div className="col-sm-4 text-center" >
-          <img className="release_image release-main" src={item.image} onClick={() => {this.props.setRelease(), this.setSelectedRelease([item.name, item.date, item.album_info, item.image, item.bc_code]), this.setOptionalContent(item.optional_content), this.setOptionalHTML(item.optional_html)}}/>
-          <h5 className="release-main"onClick={() => {this.props.setRelease(), this.setSelectedRelease([item.name, item.date, item.album_info, item.image, item.bc_code]), this.setOptionalContent(item.optional_content), this.setOptionalHTML(item.optional_html)}}>{item.name}</h5>
+          <img className="release_image release-main" src={item.image} onClick={() => {this.setSelectedRelease([item.name, item.date, item.album_info, item.image, item.bc_code]), this.setOptionalContent(item.optional_content), this.setOptionalHTML(item.optional_html)}}/>
+          <h5 className="release-main"onClick={() => {this.setSelectedRelease([item.name, item.date, item.album_info, item.image, item.bc_code]), this.setOptionalContent(item.optional_content), this.setOptionalHTML(item.optional_html)}}>{item.name}</h5>
         </div>
       )
       i++
@@ -55,7 +55,7 @@ export default class ReleaseContent extends React.Component {
   render () {
     return (
       <div>
-        {this.props.page === "main" ? this.renderMain() : this.renderSelectedRelease()}
+        {this.state.selectedRelease === "none" ? this.renderMain() : this.renderSelectedRelease()}
       </div>
     )
   }

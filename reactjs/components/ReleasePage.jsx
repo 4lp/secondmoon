@@ -13,11 +13,11 @@ export default class ReleaseContent extends React.Component {
 		let image = this.props.selectedRelease[3]
 		let bc_code = this.props.selectedRelease[4]
 		return (
-			<div className="row">
+			<div className="row" style={{background: 'center url('+image+')', backgroundSize: 'cover'}}>
 				<div className="col-md-6">
 					<iframe 
 					className="releases"
-					style={{width: "65%", height: "500px",}} 
+					style={{width: "65%", height: "500px", border: "none", padding: "20px"}} 
 					src={"https://bandcamp.com/EmbeddedPlayer/album="+bc_code+"/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"}
 					seamless>
 					</iframe>
@@ -28,7 +28,7 @@ export default class ReleaseContent extends React.Component {
 					<hr/>
 					<p>{info}</p>
 				</div>
-				<h5 onClick={()=>{this.props.setReleaseMain()}}>Back to Releases</h5>
+				<h5 onClick={()=>{this.props.setSelectedRelease("none")}}>Back to Releases</h5>
 			</div>
 		)
 	}

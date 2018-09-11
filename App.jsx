@@ -33,8 +33,14 @@ const fortunes = [
 class App extends React.Component {
 
 	newsClickHandler(){
-		dhtmlwindow.open('ajaxbox', 'div', 'news', 'NEWS', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1'); 
+		dhtmlwindow.open('ajaxbox', 'div', 'news', 'NEWS', 'left=300px,top=100px,resize=1,scrolling=1'); 
 		render(<BlogpostPage/>, document.querySelector("#ajaxbox>.drag-contentarea"))
+		return false
+	}
+
+	releaseClickHandler(){
+		dhtmlwindow.open('ajaxbox', 'div', 'releases', 'RELEASES', 'left=300px,top=100px,resize=1,scrolling=1'); 
+		render(<ReleasePageContainer/>, document.querySelector("#ajaxbox>.drag-contentarea"))
 		return false
 	}
 
@@ -54,8 +60,7 @@ class App extends React.Component {
 					<li>
 						<a 
 							href="#" 
-								onClick={()=>{dhtmlwindow.open('ajaxbox', 'div', 'releases', 'RELEASES', 'width=650px,height=400px,left=300px,top=100px,resize=0,scrolling=1'); 
-							return false}}
+								onClick={()=>{this.releaseClickHandler()}}
 						>
 						releases
 						</a>
@@ -140,8 +145,10 @@ class App6 extends React.Component {
     constructor(props){
           super(props);
           this.state = {
-              fortune: ""
+              fortune: "",
+			  question: ""
           };
+	      this.handleChange = this.handleChange.bind(this);
       }
 
       setFortune(fortune){
@@ -149,30 +156,36 @@ class App6 extends React.Component {
       }
 
       getRandomInt(min, max) {
-          min = Math.ceil(min);
-          max = Math.floor(max);
-          return Math.floor(Math.random() * (max - min)) + min;
+          min = Math.ceil(min)
+          max = Math.floor(max)
+          return Math.floor(Math.random() * (max - min)) + min
       }
 
 	  clearAnswer(){
 		  return null
 	  }
 
-      getFortune() {
+      getFortune(e) {
+		  e.preventDefault()
           let len = fortunes.length
           let i = this.getRandomInt(0, len)
           this.setFortune(fortunes[i])
+		  this.setState({ question: "" })
       }
+
+	  handleChange(e) {
+		  this.setState({ question: e.target.value })
+	  }
 
     render(){
         return(
             <div id="page5">
 				<form>
                     <label htmlFor="question">Ask the Cube</label>
-                    <input className="form-control" name="question" id="question"/>
-                	<button className="btn" onClick={() => this.getFortune()}>~ask the noochCube~</button>
+                    <input className="form-control" name="question" id="question" onChange={this.handleChange} value={this.state.question}/>
+                	<button className="btn" onClick={(e) => this.getFortune(e)}>~ask the noochCube~</button>
+					<p>{this.state.fortune}</p>
 				</form>
-                <p>{this.state.fortune}</p>
             </div>
             )
     }
@@ -183,6 +196,16 @@ class BlogpostPage extends React.Component {
 		return(
 			<Provider store={store}>
 				<BlogpostContainer count="02"/>
+			</Provider>
+		)
+	}
+}
+
+class ReleasePageContainer extends React.Component {
+	render(){
+		return(
+			<Provider store={store}>
+				<ReleaseContainer/>
 			</Provider>
 		)
 	}

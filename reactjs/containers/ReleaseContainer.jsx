@@ -34,11 +34,9 @@ export default class ReleaseContainer extends React.Component {
     }
     return (
       <div className="releases">
-        <div className="row">
           {release.content !== undefined &&
-          <ReleaseContent content={release.content} page={this.props.page} setRelease={this.props.setRelease} setReleaseMain={this.props.setReleaseMain} />
+          <ReleaseContent content={release.content}/>
           }
-        </div>
       </div>
     )
   }

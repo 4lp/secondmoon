@@ -8,7 +8,7 @@ const initialState = {
 export default function release(state=initialState, action={}) {
   switch (action.type) {
   case releaseActions.RELEASE:
-    return {...state, isLoadingTeams: true}
+    return {...state, isLoadingRelease: true}
   case releaseActions.RELEASE_SUCCESS:
     return {...state, isLoadingRelease: false, content: action.res}
   case releaseActions.RELEASE_ERROR400:
