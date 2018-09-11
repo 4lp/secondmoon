@@ -4,10 +4,10 @@ To Do:
 - Add Django backend
 -- ~News~
 -- ~Releases~
--- Get static files working
--- Set up Redux
+-- ~Get static files working~
+-- ~Set up Redux~
 - ~Use nodemailer~ used formspree instead
-- Change embeds/~api calls~
+- ~Change embeds/api calls~
 - ~Figure out background issue~
 - Upgrade packages?
 - Styles!
@@ -15,3 +15,4 @@ To Do:
 -- News
 -- Fortune
 -- Messaging
+<img src="https://i.imgur.com/ALLWsHj.png"/>
