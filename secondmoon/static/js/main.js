@@ -65,6 +65,16 @@ function moveEnvelope() {
 	}
 }
 
+function resetCube(){
+    new TWEEN.Tween( cube.rotation ).to( {x: 0,  y: 0, z: 0  }, 1000 ).easing( TWEEN.Easing.Quadratic.Out).start();
+	camera.position.z = 0;
+	camera.position.x = 1200;
+	camera.position.y = 0;
+	camera.rotation._x = 0;
+	camera.rotation._y = Math.PI/2;
+	camera.rotation._z = 0;
+}
+
 function envelopeOnHover() {
 	if (envelopeDown == true) {
 		new TWEEN.Tween( parent.rotation ).to( {  x:  parent.rotation.x + toRadian(-20)}, 100 ).easing( TWEEN.Easing.Quadratic.Out).start();
@@ -177,15 +187,27 @@ function init() {
 function createCSS3DObject(content) {
 	// info
 	info = document.createElement( 'div' );
-	info.style.position = 'absolute';
+	info.id = "helpinfo"
 	info.style.top = '30px';
-	info.style.right = '30px';
-	info.style.width = '100%';
+	info.style.right = '0';
 	info.style.textAlign = 'right';
-	info.style.fontWeight = 'bold';
+	info.style.float = 'right';
+	//info.style.fontWeight = 'bold';
 	info.style.zIndex = '1';
+	info.style.backgroundColor='white';
 	// color doesn't work unless doing it inline for some reason...
-	info.innerHTML = '<p style="color:white">Click and drag or use your keyboard to move the cube. Use your scrollwheel to zoom.</p>'
+	info.innerHTML = '<p style="">' +
+		'Click and drag or use your keyboard to move the cube.<br/> Use your scrollwheel to zoom.</p>'+
+		'<p>Controls</p>'+
+		'<ul style="text-align:right">'+
+		'<li><a href="#!" onClick="resetCube()">Reset</a></li>' +
+		'<li><a href="#!" onClick="onKeyDown({keycode:38})">Up</a></li>'+
+		'<li><a href="#!" onClick="resetCube()">Down</a></li>'+
+		'<li><a href="#!" onClick="resetCube()">Left</a></li>'+
+		'<li><a href="#!" onClick="resetCube()">Right</a></li>'+
+		'<li><a href="#!" onClick="resetCube()">Zoom In</a></li>'+
+		'<li><a href="#!" onClick="resetCube()">Zoom Out</a></li>'+
+		'</ul>'
 	document.body.appendChild( info );
 	var wrapper = document.createElement('div');
 	wrapper.innerHTML = content;

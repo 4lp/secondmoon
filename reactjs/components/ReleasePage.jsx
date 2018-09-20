@@ -12,8 +12,12 @@ export default class ReleaseContent extends React.Component {
 		let info = this.props.selectedRelease[2]
 		let image = this.props.selectedRelease[3]
 		let bc_code = this.props.selectedRelease[4]
+		let bgStyle = {
+			backgroundImage: "linear-gradient(rgba(255, 250, 253, 1), rgba(0, 0, 0, 0.6)),url(" + image + ")", 
+			backgroundPosition: "center"
+		}
 		return (
-			<div className="row" style={{background: 'center url('+image+')', backgroundSize: 'cover'}}>
+			<div className="row" style={bgStyle}>
 				<div className="col-md-6">
 					<iframe 
 					className="releases"
@@ -22,13 +26,13 @@ export default class ReleaseContent extends React.Component {
 					seamless>
 					</iframe>
 				</div>
-				<div className="col-md-6 blogpost">
+				<div className="col-md-5 release-text" style={{overflowY: "scroll"}}>
 					<h3>{name}</h3>
 					<em>{date}</em>
 					<hr/>
 					<p>{info}</p>
 				</div>
-				<h5 onClick={()=>{this.props.setSelectedRelease("none")}}>Back to Releases</h5>
+				<a href="#!"><h5 className="release-text" onClick={()=>{this.props.setSelectedRelease("none")}}>Back to Releases</h5></a>
 			</div>
 		)
 	}

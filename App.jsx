@@ -27,7 +27,11 @@ const fortunes = [
     'We can go down to the store with the dog. It is not too far away.',
     'My big yellow cat ate the little black bird.',
     'I like to read my book at school.',
-    'We are going to swim at the park.'
+    'We are going to swim at the park.',
+	'<img src="https://i.imgur.com/4FObzQn.png"/>',
+	'<img src="https://i.imgur.com/4FObzQn.png"/>',
+	'<img src="https://i.imgur.com/4FObzQn.png"/>',
+	'<img src="https://i.imgur.com/5X9HM5o.gif"/>',
 ]
 
 class App extends React.Component {
@@ -146,7 +150,8 @@ class App6 extends React.Component {
           super(props);
           this.state = {
               fortune: "",
-			  question: ""
+			  question: "",
+			  image: "https://i.imgur.com/KVpx6Ol.png"
           };
 	      this.handleChange = this.handleChange.bind(this);
       }
@@ -180,11 +185,18 @@ class App6 extends React.Component {
     render(){
         return(
             <div id="page5">
-				<form>
+				<form className="text-center">
                     <label htmlFor="question">Ask the Cube</label>
                     <input className="form-control" name="question" id="question" onChange={this.handleChange} value={this.state.question}/>
-                	<button className="btn" onClick={(e) => this.getFortune(e)}>~ask the noochCube~</button>
-					<p>{this.state.fortune}</p>
+					<img src={this.state.image}/>
+                	<button className="btn" 
+						onMouseEnter={()=>this.setState({image: "https://i.imgur.com/f3DLll5.png"})}
+						onMouseLeave={()=>this.setState({image: "https://i.imgur.com/KVpx6Ol.png"})}
+						onClick={(e) => this.getFortune(e)}
+					>
+						~ A S K !~
+					</button>
+					<div dangerouslySetInnerHTML={{__html: this.state.fortune}}></div>
 				</form>
             </div>
             )

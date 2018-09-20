@@ -12,7 +12,27 @@
 	</head>
 	<body>
 		<div id="app"></div>
-		<!--script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script-->
+		<script type="text/javascript">
+			(function(){
+				//document.body.style.webkitAnimationPlayState = "paused";
+				document.body.opacity = 1;
+				loadingDiv = document.createElement( 'div' );
+				loadingDiv.id = "loading";
+				loadingDiv.style.height = document.documentElement.clientHeight + "px";
+				loadingDiv.style.width = document.documentElement.clientWidth + "px";
+				loadingDiv.style.background = "#000";
+				loadingDiv.style.zIndex = 99999;
+				loadingDiv.innerHTML = "<img style='margin-top:"+ document.documentElement.clientHeight/2 + 
+					"px; margin-left:40%' src='https://i.imgur.com/fCKBK7g.gif'/> <img style='margin-left:40%' src='https://i.imgur.com/pm8E2Hg.gif'/>";
+				document.body.appendChild(loadingDiv);
+
+				setTimeout(function(){
+					document.getElementById('loading').remove();
+					document.getElementById('helpinfo').style.position = 'absolute';
+					//document.body.style.webkitAnimationPlayState = "running";
+				},100);
+			})();
+		</script>		<!--script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script-->
 		<script src={% static "js/three.min.js" %}></script>
 		<script src={% static "js/tween.min.js" %}></script>
 		<script src={% static "js/CSS3DRenderer.js" %}></script>
@@ -42,6 +62,7 @@
 		***********************************************/
 		</script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 		{% block main %}
 		{% load render_bundle from webpack_loader %}
 		{% render_bundle 'vendors' %}

@@ -35,8 +35,8 @@ export default class ReleaseContent extends React.Component {
     let i = 0
     content.forEach((item, index) => {
       let node = (
-        <div className="col-sm-4 text-center" >
-          <img className="release_image release-main" src={item.image} onClick={() => {this.setSelectedRelease([item.name, item.date, item.album_info, item.image, item.bc_code]), this.setOptionalContent(item.optional_content), this.setOptionalHTML(item.optional_html)}}/>
+        <div className="col-sm-12 text-center" >
+          <img style={{maxWidth:"300px"}}className="release_image release-main" src={item.image} onClick={() => {this.setSelectedRelease([item.name, item.date, item.album_info, item.image, item.bc_code]), this.setOptionalContent(item.optional_content), this.setOptionalHTML(item.optional_html)}}/>
           <h5 className="release-main"onClick={() => {this.setSelectedRelease([item.name, item.date, item.album_info, item.image, item.bc_code]), this.setOptionalContent(item.optional_content), this.setOptionalHTML(item.optional_html)}}>{item.name}</h5>
         </div>
       )

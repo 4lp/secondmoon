@@ -2,6 +2,7 @@ body {
 	margin: 0;
 	overflow: hidden;
     cursor: url(http://ani.cursors-4u.net/nature/nat-11/nat1040.ani), url(http://ani.cursors-4u.net/nature/nat-11/nat1035.png), progress !important;
+	font-family: monospace;
 
 	-webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
 	-moz-animation: fadein 2s; /* Firefox < 16 */
@@ -140,4 +141,14 @@ form {
 
 #ajaxbox {
 	width: auto !important;
+}
+
+.release-text {
+	background: black;
+	margin: 10px 0 10px 0;
+	padding: 10px;
+	box-shadow: pink 10px 10px 7px;
+	font-family: monospace;
+	color: pink;
+	max-height: 500px;
 }

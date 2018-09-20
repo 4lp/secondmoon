@@ -7,8 +7,8 @@ export default class BlogpostContent extends React.Component {
     let count = ""
     let i = 0
     let j = 0 
-		let page = 0
-		let pagination = []
+	let page = 0
+	let pagination = []
     if (this.props.count === "all") {
       count = 2
     } else {
@@ -30,6 +30,7 @@ export default class BlogpostContent extends React.Component {
       }
       i++
     })
+
     
     content.forEach((item) => {
 			if (j % 2 === 0){
@@ -38,7 +39,7 @@ export default class BlogpostContent extends React.Component {
 				let node = null 
 				if (count === newCount){
 					node = (
-						<a className="fa" onClick={()=>{this.props.setBlog(newCount)}}><strong>{page}</strong></a>
+						<a className="fa"><strong>{page}</strong></a>
 					)
 				} else {
 					node = (
